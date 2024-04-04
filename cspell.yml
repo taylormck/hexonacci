@@ -12,4 +12,4 @@ dictionaries:
 
 ignorePaths:
   - 'target'
-  - '/project-words.txt'
+  - './project-words.txt'
