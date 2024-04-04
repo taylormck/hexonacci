@@ -1,7 +1,4 @@
-use std::collections::VecDeque;
-
-use num_bigint::BigUint;
-use num_traits::{One, Zero};
+mod hex;
 
 fn main() {
     let args: Vec<String> = std::env::args().collect();
@@ -21,29 +18,7 @@ fn main() {
         }
     };
 
-    let result = get_hexonacci_num(n);
+    let result = hex::get_hexonacci_num(n);
 
     println!("{}", result);
-}
-
-fn get_hexonacci_num(n: usize) -> BigUint {
-    let mut deq: VecDeque<BigUint> = VecDeque::from([One::one()]);
-
-    for _ in 1..n {
-        let new_sum = deq.iter().sum();
-        deq.push_back(new_sum);
-
-        while deq.len() > 6 {
-            deq.pop_front();
-        }
-    }
-
-    match deq.pop_back() {
-        Some(num) => num,
-        None => {
-            println!("Error calculating the result");
-
-            BigUint::zero()
-        }
-    }
 }
