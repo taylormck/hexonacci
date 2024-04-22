@@ -10,7 +10,7 @@ fn main() {
 
     let n = &args[1];
 
-    let n: usize = match n.parse() {
+    let n = match n.parse() {
         Ok(num) => num,
         Err(_) => {
             eprintln!("You must pass an integer as the first parameter");
