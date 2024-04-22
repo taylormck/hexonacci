@@ -1,4 +1,6 @@
-use core::panic;
+/**
+* @file Module to implement the hexonacci sequence
+*/
 use num_bigint::BigInt;
 use num_traits::{One, Zero};
 use std::collections::VecDeque;
@@ -15,19 +17,8 @@ pub fn get_hexonacci_num(n: i32) -> BigInt {
     ]);
 
     for _ in 1..n {
-        let front = match deq.front() {
-            Some(num) => num,
-            None => {
-                panic!("The front of the deque should never be empty")
-            }
-        };
-
-        let back = match deq.back() {
-            Some(num) => num,
-            None => {
-                panic!("The back of the deque should never be empty")
-            }
-        };
+        let front = &deq.pop_front().unwrap();
+        let back = deq.back().unwrap();
 
         // Normally, the hexonacci sequence is defined as:
         // hex(n) = hex(n-1) + hex(n-2) + hex(n-3) + hex(n-4) + hex(n-5) + hex(n-6)
@@ -37,18 +28,9 @@ pub fn get_hexonacci_num(n: i32) -> BigInt {
         let new_sum = front + ((back - front) << 1);
 
         deq.push_back(new_sum);
-
-        deq.pop_front();
     }
 
-    match deq.pop_back() {
-        Some(num) => num,
-        None => {
-            println!("Error calculating the result");
-
-            BigInt::zero()
-        }
-    }
+    deq.pop_back().unwrap()
 }
 
 #[cfg(test)]
