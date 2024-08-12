@@ -44,8 +44,6 @@ hex :: proc(n: int) -> big.Int {
 		big.shl(&new_value, &new_value, 1)
 		big.add(&new_value, &front_value, &new_value)
 
-		// new_value := big.add(&front_value, int.shl(int.int_sub(back_value, front_value), 1))
-
 		// Update the back index
 		back_index = front_index
 
