@@ -1,1 +1,3 @@
-odin
+src.odin
+*.o
+*.bin
