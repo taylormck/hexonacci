@@ -1,4 +1,4 @@
-build: obj/main.o obj/hex.o
+build: obj/main.o obj/hex.o | obj bin
 	gcc obj/hex.o obj/main.o -lgmp -o bin/hex
 
 obj/main.o: src/main.c
@@ -6,6 +6,12 @@ obj/main.o: src/main.c
 
 obj/hex.o: src/hex.c
 	gcc -c src/hex.c -o obj/hex.o
+
+obj:
+	mkdir -p $@
+
+bin:
+	mkdir -p $@
 
 check: build
 	bin/hex 1
