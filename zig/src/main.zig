@@ -19,7 +19,14 @@ pub fn main() !void {
         std.process.exit(1);
     };
 
-    const result = hex.hex_alloc(allocator, n);
+    var result = hex.hex_alloc(allocator, n) catch |err| {
+        try std.io.getStdErr().writer().print("There was an error calculating the result: {}\n", .{err});
+        std.process.exit(1);
+    };
+    defer result.deinit();
 
-    try std.io.getStdOut().writer().print("{d}\n", .{result});
+    const result_string = try result.toString(allocator, 10, .lower);
+    defer allocator.free(result_string);
+
+    try std.io.getStdOut().writer().print("{s}\n", .{result_string});
 }
