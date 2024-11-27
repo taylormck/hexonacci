@@ -1,0 +1,12 @@
+default:
+    just --list
+
+run:
+    odin run src -- 10
+
+run-release: build
+    ./src.bin 10
+
+build:
+    odin build src -o:speed
+
