@@ -5,14 +5,12 @@ import "core:math/big"
 
 DEQUE_LENGTH :: 7
 
-hex :: proc(n: int) -> ^big.Int {
-	result := new(big.Int)
-
+hex :: proc(result: ^big.Int, n: int) {
 	// Technically, the hexonacci sequence is undefined for negative values of
 	// n, but we can just return 0
 	if n < 0 {
 		big.one(result)
-		return result
+		return
 	}
 
 	previous_values := [DEQUE_LENGTH]big.Int{}
@@ -63,5 +61,11 @@ hex :: proc(n: int) -> ^big.Int {
 
 	// The result should now be at the back of the deque
 	big.copy(result, &previous_values[back_index])
+}
+
+hex_alloc :: proc(n: int) -> ^big.Int {
+	result := new(big.Int)
+	hex(result, n)
+
 	return result
 }

@@ -18,8 +18,8 @@ main :: proc() {
 		os.exit(1)
 	}
 
-	result := hex(n)
-	defer free(result)
+	result := &big.Int{}
+	hex(result, n)
 	defer big.destroy(result)
 
 	result_string, to_string_err := big.int_to_string(result)
