@@ -32,4 +32,7 @@ main :: proc() {
 	}
 
 	fmt.println(result_string)
+
+	// Clear up the big constants at the end to make valgrind happier.
+	big.destroy_constants()
 }
