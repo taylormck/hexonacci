@@ -1,11 +1,14 @@
 package hex
 
+import "base:runtime"
 import "core:fmt"
 import "core:math/big"
 import "core:os"
 import "core:strconv"
 
 main :: proc() {
+	defer delete(os.args)
+
 	if len(os.args) != 2 {
 		fmt.eprintln("You must pass an integer as an argument")
 		os.exit(1)
