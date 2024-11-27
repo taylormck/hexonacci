@@ -19,10 +19,11 @@ main :: proc() {
 	}
 
 	result := hex(n)
-	defer big.destroy(&result)
+	defer free(result)
+	defer big.destroy(result)
 
-	result_string, to_string_err := big.int_to_string(&result)
-	defer free(&result_string)
+	result_string, to_string_err := big.int_to_string(result)
+	defer delete(result_string)
 
 	if to_string_err != nil {
 		fmt.println("Error converting the result into a string: ", to_string_err)
