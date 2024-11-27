@@ -17,5 +17,7 @@ int main (int argc, char **argv) {
 
     gmp_printf("%Zd\n", result);
 
+    mpz_clear(result);
+
     return 0;
 }

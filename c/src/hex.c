@@ -34,25 +34,33 @@ void get_hex_number(mpz_t result, int n) {
     for (int i = 2; i <= n; i++) {
         // Set the front index, round back to 0 when needed
         front_index = (back_index + 1) % DEQUE_SIZE;
-        
+
         mpz_set(back_value, nums[back_index]);
         mpz_set(front_value, nums[front_index]);
 
-		// Calculate the new value based on the edges
-		// hex(n) = 2 * (hex(n-1) - hex(n-7)) + hex(n-7)
+        // Calculate the new value based on the edges
+        // hex(n) = 2 * (hex(n-1) - hex(n-7)) + hex(n-7)
         mpz_sub(new_value, back_value, front_value);
         mpz_mul_2exp(new_value, new_value, 1);
         mpz_add(new_value, front_value, new_value);
 
         // Move the back index forward
         back_index = front_index;
-        
+
         // Set the back to the new value
         mpz_set(nums[back_index], new_value);
     }
 
     mpz_set(result, nums[back_index]);
-    
+
+    for (int i = 0; i < DEQUE_SIZE; i++) {
+        mpz_clear(nums[i]);
+    }
+
+    mpz_clear(back_value);
+    mpz_clear(front_value);
+    mpz_clear(new_value);
+
     // End of the function
     free(nums);
 }
