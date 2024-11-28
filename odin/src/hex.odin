@@ -28,8 +28,7 @@ hex :: proc(result: ^big.Int, n: int) {
 	back_index := DEQUE_LENGTH - 1
 
 	// We'll need a scratch value to store our mid-work results into
-	new_value := new(big.Int)
-	defer free(new_value)
+	new_value := &big.Int{}
 	defer big.destroy(new_value)
 
 	// We've hard-coded the values for 0 and 1, so just calculate from
