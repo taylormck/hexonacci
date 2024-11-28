@@ -22,8 +22,9 @@ main :: proc() {
 	}
 
 	result := &big.Int{}
-	hex(result, n)
 	defer big.destroy(result)
+
+	hex(result, n)
 
 	result_string, to_string_err := big.int_to_string(result)
 	defer delete(result_string)

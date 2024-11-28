@@ -9,7 +9,7 @@ hex :: proc(result: ^big.Int, n: int) {
 	// Technically, the hexonacci sequence is undefined for negative values of
 	// n, but we can just return 0
 	if n < 0 {
-		big.one(result)
+		big.zero(result)
 		return
 	}
 
